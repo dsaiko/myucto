@@ -14,7 +14,7 @@ Variable symbol: {{ payment_varsymbol|default(invoice.varsymbol) }}
 Issue date:      {{ invoice.issue_date|date('M j, Y') }}
 Due date:        {{ invoice.due_date|date('M j, Y') }}
 {% if refund_amount is defined and refund_amount is not null %}{% if is_paid %}Refunded:        {{ refund_amount|number_format(2, '.', ',') }} {{ invoice.currency }} ✓{% else %}To be refunded:  {{ refund_amount|number_format(2, '.', ',') }} {{ invoice.currency }}{% endif %}
-{% elseif is_paid %}Paid:            {{ amount_to_pay|number_format(2, '.', ',') }} {{ invoice.currency }} ✓{% else %}Amount due:      {{ amount_to_pay|number_format(2, '.', ',') }} {{ invoice.currency }}{% endif %}
+{% else %}Amount due:      {{ amount_to_pay|number_format(2, '.', ',') }} {{ invoice.currency }}{% if is_paid %} ✓{% endif %}{% endif %}
 
 {% if refund_amount is defined and refund_amount is not null %}>>> {% if payment_method == 'cash' %}{% if is_paid %}Paid out in cash.{% else %}We will pay the amount out to you in cash.{% endif %}{% elseif is_paid %}The amount has been refunded to you by bank transfer.{% else %}We will refund the amount by bank transfer under variable symbol {{ payment_varsymbol|default(invoice.varsymbol) }}.{% endif %}
 

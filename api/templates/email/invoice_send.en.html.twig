@@ -38,7 +38,7 @@
         </tr>
         {% else %}
         <tr>
-          <td style="padding:8px 0 0;color:#7A748C;border-top:1px solid #E5E0F4;">{% if is_paid %}Paid{% else %}Amount due{% endif %}</td>
+          <td style="padding:8px 0 0;color:#7A748C;border-top:1px solid #E5E0F4;">Amount due</td>
           <td style="padding:8px 0 0;border-top:1px solid #E5E0F4;font-size:18px;font-weight:700;color:{% if is_paid %}#2E7D32{% else %}{{ accent }}{% endif %};font-family:monospace;">
             {{ amount_to_pay|number_format(2, '.', ',') }} {{ invoice.currency }}{% if is_paid %} ✓{% endif %}
           </td>

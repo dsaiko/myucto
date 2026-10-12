@@ -14,7 +14,7 @@ Variabilní symbol: {{ payment_varsymbol|default(invoice.varsymbol) }}
 Datum vystavení:   {{ invoice.issue_date|date('j.n.Y') }}
 Splatnost:         {{ invoice.due_date|date('j.n.Y') }}
 {% if refund_amount is defined and refund_amount is not null %}{% if is_paid %}Vráceno:           {{ refund_amount|number_format(2, ',', ' ') }} {{ invoice.currency }} ✓{% else %}K vrácení:         {{ refund_amount|number_format(2, ',', ' ') }} {{ invoice.currency }}{% endif %}
-{% elseif is_paid %}Uhrazeno:          {{ amount_to_pay|number_format(2, ',', ' ') }} {{ invoice.currency }} ✓{% else %}K úhradě:          {{ amount_to_pay|number_format(2, ',', ' ') }} {{ invoice.currency }}{% endif %}
+{% else %}K úhradě:          {{ amount_to_pay|number_format(2, ',', ' ') }} {{ invoice.currency }}{% if is_paid %} ✓{% endif %}{% endif %}
 
 {% if refund_amount is defined and refund_amount is not null %}>>> {% if payment_method == 'cash' %}{% if is_paid %}Vyplaceno v hotovosti.{% else %}Částku vám vyplatíme v hotovosti.{% endif %}{% elseif is_paid %}Částka vám byla vrácena převodem.{% else %}Částku vám vrátíme převodem pod variabilním symbolem {{ payment_varsymbol|default(invoice.varsymbol) }}.{% endif %}
 
